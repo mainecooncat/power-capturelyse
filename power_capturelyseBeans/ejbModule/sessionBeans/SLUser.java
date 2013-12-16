@@ -10,7 +10,7 @@ import entity.User;
 
 
 @Stateless
-public class UserSB implements UserInterface{
+public class SLUser implements UserInterface{
     
     private @PersistenceContext EntityManager em;
 

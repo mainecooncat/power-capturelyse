@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 import entity.Verbrauch;
 
 @Stateless
-public class VerbrauchSB implements VerbrauchInterface{
+public class SLVerbrauch implements VerbrauchInterface{
     
     private @PersistenceContext EntityManager em;
     
