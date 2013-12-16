@@ -37,7 +37,8 @@ public class UserSB implements UserInterface{
 //	    user.setUsername(nachname);
 //	    user.setUservname(vorname);
 //	}
-	return 0;
+    	User user = new User();
+	return user;
 //	
     }
     
