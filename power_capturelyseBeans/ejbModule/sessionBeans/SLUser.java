@@ -6,21 +6,21 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.jboss.logging.Logger;
+
 import entity.User;
 
 
 @Stateless
 public class SLUser implements UserInterface{
     
-    private @PersistenceContext EntityManager em;
+    static Logger logger = Logger.getLogger(SLUser.class); 
+    @PersistenceContext(unitName="powerCapturelyseBeans") 
+    private EntityManager em;
 
     @Override
-    public int createUser() {
-	User user = new User();
-//	user.setUservname();
-//	user.setUsername();
+    public void createUser(User user) {
 	em.persist(user);
-	return user.getId();
     }
 
     @Override
@@ -32,14 +32,10 @@ public class SLUser implements UserInterface{
     
     //ToDo anbinden an JSP wegen usernamen usw.
 //    @Override
-    public User aktualisiereUser(int id) {
-//	User user = this.findUser(int id)
-//	    user.setUsername(nachname);
-//	    user.setUservname(vorname);
-//	}
-    	User user = new User();
-	return user;
-//	
+    public void updateUser(User user) {
+	em.merge(user);
+
+	
     }
     
 

@@ -1,10 +1,16 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,27 +24,37 @@ public class Energietyp implements Serializable{
     
     
     @Id
-    @GeneratedValue
-    private int id;
-    private String energietyp;
-    private String einheit;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id_energietyp;
+    @Column(nullable=false, length=45) private String energietyp;
+    @Column(nullable=false, length=45) private String einheit;
     
-    public int getId() {
-		return id;
-	}
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id_engergietyp")
+    private Set<Verbrauch> verbrauch;
+    
+    
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    
+	public int getId_energietyp() {
+        return id_energietyp;
+    }
 
+
+    public void setId_energietyp(int id_energietyp) {
+        this.id_energietyp = id_energietyp;
+    }
+
+    	
 	public String getEnergietyp() {
 		return energietyp;
 	}
-
+	
+	
 	public void setEnergietyp(String energietyp) {
 		this.energietyp = energietyp;
 	}
 
+	
 	public String getEinheit() {
 		return einheit;
 	}
@@ -46,10 +62,19 @@ public class Energietyp implements Serializable{
 	public void setEinheit(String einheit) {
 		this.einheit = einheit;
 	}
+	
+	
+	public Set<Verbrauch> getVerbrauch() {
+	        return verbrauch;
+	}
+
+	public void setVerbrauch(Set<Verbrauch> verbrauch) {
+	        this.verbrauch = verbrauch;
+	}
 
 	public Energietyp(){
 	
-    }
+	}
 	
 	
 

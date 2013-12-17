@@ -7,9 +7,9 @@ import entity.User;
 @Remote
 public interface UserInterface {
     
-    int createUser();
-    User findUser(int id);
-    User aktualisiereUser(int id);
+    public void createUser(User user);
+    public User findUser(int id);
+    public void updateUser(User user);
     
 
 }
