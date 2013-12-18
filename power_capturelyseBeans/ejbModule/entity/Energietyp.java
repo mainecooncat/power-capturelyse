@@ -26,16 +26,21 @@ public class Energietyp implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id_energietyp;
-    @Column(nullable=false, length=45) private String energietyp;
-    @Column(nullable=false, length=45) private String einheit;
+    @Column(name="energietyp",nullable=false, length=45)
+    private String energietyp;
+    @Column(name="einheit",nullable=false, length=45)
+    private String einheit;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id_engergietyp")
     private Set<Verbrauch> verbrauch;
     
     
 
+    public Energietyp(){
+	
+	}
     
-	public int getId_energietyp() {
+    public int getId_energietyp() {
         return id_energietyp;
     }
 
@@ -45,36 +50,34 @@ public class Energietyp implements Serializable{
     }
 
     	
-	public String getEnergietyp() {
-		return energietyp;
-	}
+    public String getEnergietyp() {
+	return energietyp;
+    }
 	
 	
-	public void setEnergietyp(String energietyp) {
-		this.energietyp = energietyp;
-	}
+    public void setEnergietyp(String energietyp) {
+	this.energietyp = energietyp;
+    }
 
 	
-	public String getEinheit() {
-		return einheit;
-	}
+    public String getEinheit() {
+	return einheit;
+    }
 
-	public void setEinheit(String einheit) {
-		this.einheit = einheit;
-	}
+    public void setEinheit(String einheit) {
+	this.einheit = einheit;
+    }
 	
 	
-	public Set<Verbrauch> getVerbrauch() {
-	        return verbrauch;
-	}
+    public Set<Verbrauch> getVerbrauch() {
+	 return verbrauch;
+    }
 
-	public void setVerbrauch(Set<Verbrauch> verbrauch) {
-	        this.verbrauch = verbrauch;
-	}
+    public void setVerbrauch(Set<Verbrauch> verbrauch) {
+	 this.verbrauch = verbrauch;
+    }
 
-	public Energietyp(){
 	
-	}
 	
 	
 

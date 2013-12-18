@@ -5,9 +5,9 @@ import javax.ejb.Remote;
 import entity.User;
 
 @Remote
-public interface UserInterface {
+public interface UserVerwaltungInterface {
     
-    public void createUser(User user);
+    public User createUser(User user);
     public User findUser(int id);
     public void updateUser(User user);
     

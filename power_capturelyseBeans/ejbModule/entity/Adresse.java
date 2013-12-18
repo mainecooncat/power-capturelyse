@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,17 +28,42 @@ public class Adresse implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id_adresse;
-	@Column(nullable=false, length=45) private String strasse;
-	@Column(nullable=false) private int plz;
-	@Column(nullable=false, length=45) private String ort;
+	@Column(name="strasse", nullable=false, length=45)
+	private String strasse;
+	@Column(name="plz", nullable=false)
+	private int plz;
+	@Column(name="ort", nullable=false, length=45)
+	private String ort;
 	
-	
-	@Column(nullable=false, columnDefinition="INTEGER(11)") private User id_user;
+	@ManyToOne
+	@JoinColumn(name="id_user", referencedColumnName="id_user")			
+	private User id_user;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id_adresse")
 	private Set<Verbrauch> verbrauch;
 
 
+	public Adresse(){
+		
+	}
+	
+	public Adresse(int id_adresse, String strasse, int plz, String ort, User id_user){
+	    this.id_adresse = id_adresse;
+	    this.strasse = strasse;
+	    this.plz = plz;
+	    this.ort = ort;
+	    this.id_user = id_user;
+	    	    
+	}
+	
+	public Adresse(String strasse, int plz, String ort, User id_user){	    
+	    this.strasse = strasse;
+	    this.plz = plz;
+	    this.ort = ort;
+	    this.id_user = id_user;
+	    	    
+	}
+	
 	public int getId_adresse() {
 		return id_adresse;
 	}
@@ -82,12 +106,7 @@ public class Adresse implements Serializable{
 		this.ort = ort;
 	}
 
-	@ManyToOne
-	@JoinTable(name="tb_user", joinColumns={
-		@JoinColumn(name="id_user", referencedColumnName="id_user")
-		}
-	)
-	@Column(nullable=false, columnDefinition="INTEGER(11)")
+	@Column(name="id_user", nullable=false, columnDefinition="INTEGER(11)")
 	public User getId_User() {
 		return id_user;
 	}
@@ -107,9 +126,8 @@ public class Adresse implements Serializable{
 	    
 	}
 	
-	public Adresse(){
-		
-	}
+	
+	
 	
 	
 

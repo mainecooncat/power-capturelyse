@@ -1,6 +1,6 @@
 package sessionBeans;
 
-import interfaces.UserInterface;
+import interfaces.UserVerwaltungInterface;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -12,15 +12,15 @@ import entity.User;
 
 
 @Stateless
-public class SLUser implements UserInterface{
+public class UserVerwaltungBean implements UserVerwaltungInterface{
     
-    static Logger logger = Logger.getLogger(SLUser.class); 
+    static Logger logger = Logger.getLogger(UserVerwaltungBean.class); 
     @PersistenceContext(unitName="powerCapturelyseBeans") 
     private EntityManager em;
 
-    @Override
-    public void createUser(User user) {
+    public User createUser(User user) {			
 	em.persist(user);
+	return user;
     }
 
     @Override

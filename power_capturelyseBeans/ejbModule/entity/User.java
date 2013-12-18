@@ -11,13 +11,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+//import javax.persistence.NamedQueries;
+//import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SecondaryTable;
 //import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tb_user")
-//@SecondaryTable(name="tb_adresse")
+@SecondaryTable(name="tb_adresse")
+//@NamedQueries({
+//    @NamedQuery(name="User.findById", query="SELECT user FROM User WHERE id_user = :id_user"),
+//    @NamedQuery(name="User.findByName", query="SELECT user FROM User WHERE username = :name")
+//    
+//})
+
 public class User implements Serializable{
 
     /**
@@ -27,51 +36,38 @@ public class User implements Serializable{
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id_user", nullable=false)
     private int id_user;
-    @Column(nullable=false, length=45) private String username;
-    @Column(nullable=false, length=45) private String uservname;
-    @Column(nullable=false, length=45) private String password;
+    @Column(name="username",nullable=false, length=45)
+    private String username;
+    @Column(name="uservname",nullable=false, length=45)
+    private String uservname;
+    @Column(name="password",nullable=false, length=45)
+    private String password;
     
     //Adresse
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id_user")
     private List<Adresse> adresse;
+           
+    public User(){
+    	
+    }
     
-    //oder so
-//    private String strasse;
-//    private String ort; 
-//    private int plz;
-//    
-//    @Column(name="strasse", table="tb_adresse")
-//    public String getStrasse() {
-//        return strasse;
-//    }
-//
-//    public void setStrasse(String strasse) {
-//        this.strasse = strasse;
-//    }
-//
-//    @Column(name="ort", table="tb_adresse")
-//    public String getOrt() {
-//        return ort;
-//    }
-//
-//    public void setOrt(String ort) {
-//        this.ort = ort;
-//    }
-//
-//    @Column(name="plz", table="tb_adresse")
-//    public int getPlz() {
-//        return plz;
-//    }
-//
-//    public void setPlz(int plz) {
-//        this.plz = plz;
-//    }
+    public User(int id_user, String username, String uservname, String password){
+	this.id_user = id_user;
+	this.username = username;
+	this.uservname = uservname;
+	this.password = password;
+	
+    }
     
+    public User(String username, String uservname, String password){	
+	this.username = username;
+	this.uservname = uservname;
+	this.password = password;
+	
+    }
     
-    
-    
-
     public int getId_user() {
         return id_user;
     }
@@ -117,11 +113,35 @@ public class User implements Serializable{
     public void setAdresse(List<Adresse> adresse){
 	this.adresse = adresse;
     }
-    
-    
-    public User(){
-	
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + id_user;
+	return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	User other = (User) obj;
+	if (id_user != other.id_user)
+	    return false;
+	return true;
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
 	
