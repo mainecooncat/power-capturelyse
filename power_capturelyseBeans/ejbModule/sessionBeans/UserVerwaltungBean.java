@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.jboss.logging.Logger;
 
+import entity.Adresse;
 import entity.User;
 
 
@@ -18,8 +19,9 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
     @PersistenceContext(unitName="powerCapturelyseBeans") 
     private EntityManager em;
 
-    public User createUser(User user) {			
+    public User createUser(User user, Adresse adresse) {			
 	em.persist(user);
+	em.persist(adresse);
 	return user;
     }
 
@@ -33,10 +35,10 @@ public class UserVerwaltungBean implements UserVerwaltungInterface{
     //ToDo anbinden an JSP wegen usernamen usw.
 //    @Override
     public void updateUser(User user) {
-	em.merge(user);
-
-	
+	em.merge(user);	
     }
+
+    
     
 
 }

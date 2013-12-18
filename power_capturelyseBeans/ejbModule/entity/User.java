@@ -14,13 +14,13 @@ import javax.persistence.Id;
 //import javax.persistence.NamedQueries;
 //import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SecondaryTable;
+//import javax.persistence.SecondaryTable;
 //import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tb_user")
-@SecondaryTable(name="tb_adresse")
+//@SecondaryTable(name="tb_adresse")
 //@NamedQueries({
 //    @NamedQuery(name="User.findById", query="SELECT user FROM User WHERE id_user = :id_user"),
 //    @NamedQuery(name="User.findByName", query="SELECT user FROM User WHERE username = :name")
@@ -46,7 +46,7 @@ public class User implements Serializable{
     private String password;
     
     //Adresse
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id_user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Adresse> adresse;
            
     public User(){

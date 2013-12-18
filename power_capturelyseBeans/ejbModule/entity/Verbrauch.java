@@ -34,29 +34,29 @@ public class Verbrauch implements Serializable{
     private Timestamp datum;           
     @Column(name="id_adresse", nullable=false, columnDefinition="INTEGER(11)")    
     @JoinColumn(name="id_adresse", referencedColumnName="id_adresse")		
-    private Adresse id_adresse;
+    private Adresse adresse;
     
     @ManyToOne
-    @JoinColumn(name="id_energietyp", referencedColumnName="id_energietyp")	
-    private Energietyp id_engergietyp;
+    @JoinColumn(name="id_energietyp", referencedColumnName="id_energietyp", nullable=false, columnDefinition="INTEGER(11)")	
+    private Energietyp engergietyp;
     
         
     public Verbrauch(){
     	
     }
     
-    public Verbrauch(int id_verbrauch, BigDecimal zaehlerstand, Timestamp datum, Energietyp id_energietyp){
+    public Verbrauch(int id_verbrauch, BigDecimal zaehlerstand, Timestamp datum, Energietyp energietyp){
 	this.id_verbrauch = id_verbrauch;
 	this.datum = datum;
 	this.zaehlerstand = zaehlerstand;
-	this.id_engergietyp = id_energietyp;
+	this.engergietyp = energietyp;
 	
     }
     
-    public Verbrauch(BigDecimal zaehlerstand, Timestamp datum, Energietyp id_energietyp){	
+    public Verbrauch(BigDecimal zaehlerstand, Timestamp datum, Energietyp energietyp){	
 	this.datum = datum;
 	this.zaehlerstand = zaehlerstand;
-	this.id_engergietyp = id_energietyp;
+	this.engergietyp = energietyp;
     }
     
     public int getId_verbrauch() {
@@ -84,23 +84,20 @@ public class Verbrauch implements Serializable{
         this.datum = datum;
     }
     
-    public Adresse getId_adresse() {
-        return id_adresse;
+    public Adresse getAadresse() {
+        return adresse;
     }
 
-    public void setId_adresse(Adresse id_adresse) {
-        this.id_adresse = id_adresse;
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
     
-    
-
-    @Column(name="id_energietyp", nullable=false, columnDefinition="INTEGER(11)")
-    public Energietyp getId_engergietyp() {
-        return id_engergietyp;
+    public Energietyp getEngergietyp() {
+        return engergietyp;
     }
 
-    public void setId_engergietyp(Energietyp id_engergietyp) {
-        this.id_engergietyp = id_engergietyp;
+    public void setEngergietyp(Energietyp engergietyp) {
+        this.engergietyp = engergietyp;
     }
 
 

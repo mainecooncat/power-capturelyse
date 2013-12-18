@@ -27,6 +27,7 @@ public class Adresse implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_adresse")
 	private int id_adresse;
 	@Column(name="strasse", nullable=false, length=45)
 	private String strasse;
@@ -36,10 +37,10 @@ public class Adresse implements Serializable{
 	private String ort;
 	
 	@ManyToOne
-	@JoinColumn(name="id_user", referencedColumnName="id_user")			
-	private User id_user;
+	@JoinColumn(name="id_user", referencedColumnName="id_user", nullable=false, columnDefinition="INTEGER(11)")			
+	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id_adresse")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "adresse")
 	private Set<Verbrauch> verbrauch;
 
 
@@ -47,20 +48,28 @@ public class Adresse implements Serializable{
 		
 	}
 	
-	public Adresse(int id_adresse, String strasse, int plz, String ort, User id_user){
-	    this.id_adresse = id_adresse;
+//	public Adresse(int id_adresse, String strasse, int plz, String ort, User id_user){
+//	    this.id_adresse = id_adresse;
+//	    this.strasse = strasse;
+//	    this.plz = plz;
+//	    this.ort = ort;
+//	    this.id_user = id_user;
+//	    	    
+//	}
+	
+	public Adresse(String strasse, int plz, String ort, User user){	    
 	    this.strasse = strasse;
 	    this.plz = plz;
 	    this.ort = ort;
-	    this.id_user = id_user;
+	    this.user = user;
 	    	    
 	}
 	
-	public Adresse(String strasse, int plz, String ort, User id_user){	    
+	public Adresse(String strasse, int plz, String ort){	    
 	    this.strasse = strasse;
 	    this.plz = plz;
 	    this.ort = ort;
-	    this.id_user = id_user;
+	    
 	    	    
 	}
 	
@@ -107,13 +116,13 @@ public class Adresse implements Serializable{
 	}
 
 	@Column(name="id_user", nullable=false, columnDefinition="INTEGER(11)")
-	public User getId_User() {
-		return id_user;
+	public User getUser() {
+		return user;
 	}
 
 
-	public void setId_User(User id_user) {
-		this.id_user = id_user;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 		
